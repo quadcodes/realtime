@@ -24,8 +24,9 @@ io.on('connection', function(socket){
 */
 
 app.get('/sample', function(req, res){
-	var data = url.parse(req.url,true).query;
-    res.send('Switch : ' + data.status);
+   res.sendFile(__dirname + '/sample.html');
+   var data = url.parse(req.url,true).query;
+   res.send('Switch : ' + data.status);
 });
 
 app.get('/submit', function(req, res){
