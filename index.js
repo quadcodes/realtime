@@ -12,10 +12,21 @@ server.listen(port, function(){
   console.log('listening on:' + port);
 });
 
+var mandar = "";
+io.on('connection', function(socket){
+  socket.on('switch', function(msg){
+    io.emit('switch', msg);
+    socket.send('switch :' + msg);
+    mandar = msg;
+    console.log(mandar);
+  });
+});
+
 app.get('/submit', function(req, res){
   var data = url.parse(req.url,true).query;
   io.emit('temperature', data);
   res.send('Temperature Updated to: ' + data.temperature);
+  res.send('Switch: ' + mandar);
 });
 
 io.on('connection', function(socket){
