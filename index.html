@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Socket.IO Realtime Example</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.socket.io/socket.io-1.3.5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
+</head>
+<body>
+
+    <h1 id="temperature"></h1>
+
+    <script>
+      var socket = io();
+      socket.on('temperature', function (data) {
+        console.log(data);
+        $('h1#temperature').html(data.temperature);
+      });
+    </script>
+
+</body>
+</html>
