@@ -1,0 +1,6 @@
+{
+  "name": "Socket.io Realtime Example",
+  "description": "",
+  "repository": "https://github.com/quadcodes/realtime",
+  "keywords": ["node", "express", "socketio"]
+}
