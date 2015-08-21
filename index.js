@@ -11,7 +11,7 @@ var port = process.env.PORT || 8080;
 server.listen(port, function(){
   console.log('listening on:' + port);
 });
-
+/*
 var mandar = "";
 io.on('connection', function(socket){
   socket.on('switch', function(msg){
@@ -21,12 +21,17 @@ io.on('connection', function(socket){
     console.log(mandar);
   });
 });
+*/
+
+app.get('/sample', function(req, res){
+	var data = url.parse(req.url,true).query;
+    res.send('Switch : ' + data.status);
+});
 
 app.get('/submit', function(req, res){
   var data = url.parse(req.url,true).query;
   io.emit('temperature', data);
   res.send('Temperature Updated to: ' + data.temperature);
-  res.send('Switch: ' + mandar);
 });
 
 io.on('connection', function(socket){
