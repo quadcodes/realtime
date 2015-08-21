@@ -5,9 +5,11 @@ var url = require('url');
 var server = http.createServer(app);
 var io = require('socket.io').listen(server);  //pass a http.Server instance
 
+// "process.env.PORT" to set port by Heroku
+var port = process.env.PORT || 8080;
 
-server.listen(3000, function(){
-  console.log('listening on *:3000');
+server.listen(port, function(){
+  console.log('listening on:' + port);
 });
 
 app.get('/submit', function(req, res){
@@ -15,15 +17,6 @@ app.get('/submit', function(req, res){
   io.emit('temperature', data);
   res.send('Temperature Updated to: ' + data.temperature);
 });
-
-/*
-io.on('connection', function(socket, res) {
-  socket.on('switch', function(status) {
-    io.emit('switch', status);
-    res.send('switch :' + status);
-  });
-});
-*/
 
 io.on('connection', function(socket){
   socket.on('switch', function(msg){
