@@ -7,13 +7,13 @@ var url = require('url');
 var server = http.createServer(app);
 var io = require('socket.io').listen(server);  //pass a http.Server instance
 
-/*
+
 // Serial Port
 var SerialPort = require('serialport').SerialPort;
 var serialPort = new SerialPort('/dev/cu.usbserial-A9E9H3RJ', {
     baudrate: 115200
 });
-*/
+
 
 // "process.env.PORT" to set port by Heroku
 var port = process.env.PORT || 8080;
@@ -27,11 +27,11 @@ io.on('connection', function(socket){
   socket.on('switch', function(msg){
     switch_status = msg;
     console.log(msg);
-    /*
+
 	//write to serialport
   	serialPort.write(msg + "\n", function(err, results) {
         console.log('bytes written: ', results);
-    });     */
+    });   
     
   });
 });
