@@ -2,10 +2,20 @@ var express = require('express');
 var app = express();
 var http = require('http');
 var url = require('url');
-var SerialPort = require('serialport').SerialPort;
+var serialport = require('serialport');
 var server = http.createServer(app);
 var io = require('socket.io').listen(server);  //pass a http.Server instance
 
+// Serial Port
+var portName = '/dev/cu.usbserial-A9E9H3RJ'; // Mac環境
+var sp = new serialport.SerialPort(portName, {
+    baudrate: 115200,
+    parser: serialport.parsers.readline("\n"),
+    dataBits: 8,
+    parity: 'none',
+    stopBits: 1,
+    flowControl: false,
+});
 
 // "process.env.PORT" to set port by Heroku
 var port = process.env.PORT || 8080;
@@ -14,11 +24,7 @@ server.listen(port, function(){
   console.log('listening on:' + port);
 });
 
-// Serial Port
-var serialPort = new SerialPort('/dev/cu.usbserial-A9E9H3RJ', {
-    baudrate: 115200,
-    parser: require('serialport').parsers.readline("\n")
-});
+
 
 var switch_status;
 io.on('connection', function(socket){
@@ -49,7 +55,7 @@ app.get('/', function(req, res){
 
 
 //data from arduino
-SerialPort.on('data', function(data) {
+sp.on('data', function(data) {
 	console.log('serialpor data received: ' + data);
 	try{
 		var length = JSON.parse(data).length;
@@ -63,11 +69,11 @@ SerialPort.on('data', function(data) {
 
 
 
-SerialPort.on('close', function(err) {
+sp.on('close', function(err) {
     console.log('port closed');
 });
 
 //serialport open
-SerialPort.open(function () {
+sp.open(function () {
   console.log('port open');
 });
