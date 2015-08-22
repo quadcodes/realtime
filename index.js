@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 var http = require('http');
 var url = require('url');
+var SerialPort = require('serialport').SerialPort;
 var fs = require('fs');
 var path = require('path');
 
@@ -9,18 +10,16 @@ var server = http.createServer(app);
 var io = require('socket.io').listen(server);  //pass a http.Server instance
 
 
-// Serial Port
-var SerialPort = require('serialport').SerialPort;
-var serialPort = new SerialPort('/dev/cu.usbserial-A9E9H3RJ', {
-    baudrate: 115200
-});
-
-
 // "process.env.PORT" to set port by Heroku
 var port = process.env.PORT || 8080;
 
 server.listen(port, function(){
   console.log('listening on:' + port);
+});
+
+// Serial Port
+var serialPort = new SerialPort('/dev/cu.usbserial-A9E9H3RJ', {
+    baudrate: 115200
 });
 
 var switch_status;
