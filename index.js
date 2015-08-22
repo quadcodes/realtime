@@ -8,7 +8,7 @@ var io = require('socket.io').listen(server);  //pass a http.Server instance
 // Serial Port
 var SerialPort = require('serialport').SerialPort;
 var serialPort = new SerialPort('/dev/cu.usbserial-A9E9H3RJ', {
-    baudRate: 115200
+    baudrate: 115200
 });
 
 // "process.env.PORT" to set port by Heroku
