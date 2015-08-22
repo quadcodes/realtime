@@ -2,7 +2,7 @@ var express = require('express');
 var app = express();
 var http = require('http');
 var url = require('url');
-var SerialPort = require('serialport').SerialPort;
+var SerialPort = require('serialports').SerialPort;
 var server = http.createServer(app);
 var io = require('socket.io').listen(server);  //pass a http.Server instance
 
