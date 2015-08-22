@@ -6,15 +6,9 @@ var server = http.createServer(app);
 var io = require('socket.io').listen(server);  //pass a http.Server instance
 
 // Serial Port
-var serialport = require('serialport');
-var portName = '/dev/cu.usbserial-A9E9H3RJ';
-var sp = new serialport.SerialPort(portName, {
-    baudRate: 115200,
-    parser: serialport.parsers.readline("\n"),
-    dataBits: 8,
-    parity: 'none',
-    stopBits: 1,
-    flowControl: false,
+var SerialPort = require('serialport').SerialPort;
+var serialPort = new SerialPort('/dev/cu.usbserial-A9E9H3RJ', {
+    baudRate: 115200
 });
 
 // "process.env.PORT" to set port by Heroku
@@ -30,8 +24,8 @@ io.on('connection', function(socket){
     switch_status = msg;
     console.log(msg);
     
-		//write to serialport
-  	sp.write(msg + "\n", function(err, results) {
+	//write to serialport
+  	serialPort.write(msg + "\n", function(err, results) {
         console.log('bytes written: ', results);
     });    
     
