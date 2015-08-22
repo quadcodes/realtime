@@ -46,3 +46,28 @@ app.get('/submit', function(req, res){
 app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
 });
+
+
+//data from arduino
+SerialPort.on('data', function(data) {
+	console.log('serialpor data received: ' + data);
+	try{
+		var length = JSON.parse(data).length;
+		//console.log("length = " + length);
+		io.sockets.emit('emit_from_server', length);
+	}catch(e){
+		//eat it;
+	}
+	
+});
+
+
+
+SerialPort.on('close', function(err) {
+    console.log('port closed');
+});
+
+//serialport open
+SerialPort.open(function () {
+  console.log('port open');
+});
