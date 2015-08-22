@@ -17,13 +17,11 @@ io.on('connection', function(socket){
   socket.on('switch', function(msg){
     switch_status = msg;
     console.log(msg);
-    
+  });
+});
+
 app.get('/switch', function(req, res){
     res.json({ switch: switch_status });
-});    
-    
-    
-  });
 });
 
 app.get('/submit', function(req, res){
@@ -31,16 +29,6 @@ app.get('/submit', function(req, res){
   io.emit('temperature', data);
   res.send('Temperature Updated to: ' + data.temperature);
 });
-
-/*
-io.on('connection', function(socket){
-  socket.on('switch', function(msg){
-    io.emit('switch', msg);
-    socket.send('switch :' + msg);
-    //console.log(msg);
-  });
-});
-*/
 
 app.get('/', function(req, res){
     res.sendFile(__dirname + '/index.html');
