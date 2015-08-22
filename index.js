@@ -11,22 +11,17 @@ var port = process.env.PORT || 8080;
 server.listen(port, function(){
   console.log('listening on:' + port);
 });
-/*
-var mandar = "";
+
+var switch_status;
 io.on('connection', function(socket){
   socket.on('switch', function(msg){
-    io.emit('switch', msg);
-    socket.send('switch :' + msg);
-    mandar = msg;
-    console.log(mandar);
+    switch_status = msg;
+    console.log(msg);
   });
 });
-*/
 
-app.get('/sample', function(req, res){
-   res.sendFile(__dirname + '/sample.html');
-   var data = url.parse(req.url,true).query;
-   res.send('Switch : ' + data.status);
+app.get('/switch', function(req, res){
+    res.json({ switch: mandar });
 });
 
 app.get('/submit', function(req, res){
