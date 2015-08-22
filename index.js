@@ -2,7 +2,7 @@ var express = require('express');
 var app = express();
 var http = require('http');
 var url = require('url');
-var SerialPort = require('serialports').SerialPort;
+var SerialPort = require('serialport').SerialPort;
 var server = http.createServer(app);
 var io = require('socket.io').listen(server);  //pass a http.Server instance
 
@@ -17,7 +17,12 @@ server.listen(port, function(){
 
 // Serial Port
 var serialPort = new SerialPort("/dev/cu.usbserial-A9E9H3RJ", {
-    baudrate: 115200
+    baudrate: 115200,
+    parser: serialport.parsers.readline("\n"),
+    dataBits: 8,
+    parity: 'none',
+    stopBits: 1,
+    flowControl: false,    
 });
 
 var switch_status;
