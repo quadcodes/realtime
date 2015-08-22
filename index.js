@@ -16,8 +16,8 @@ server.listen(port, function(){
 });
 
 // Serial Port
-var serialPort = new SerialPort("/dev/cu.usbserial-A9E9H3RJ", {
-    baudrate: 115200,
+var serialPort = new SerialPort("/dev/cu.usbmodem431", {
+    baudrate: 9600,
     parser: SerialPort.parsers.readline("\n")
 });
 
