@@ -21,7 +21,7 @@ io.on('connection', function(socket){
 });
 
 app.get('/switch', function(req, res){
-    res.json({ switch: mandar });
+    res.json({ switch: switch_status });
 });
 
 app.get('/submit', function(req, res){
