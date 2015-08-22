@@ -21,10 +21,9 @@
       });
       
       $('.button').click(function(){
-	  //socket.emit('switch', $(this).val());
-	  $.post('/sample?status=' + $(this).val());
+	  socket.emit('switch', $(this).val());
 	  return false;
-      });      
+      });     
       
     </script>
 
