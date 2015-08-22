@@ -7,7 +7,7 @@ var server = http.createServer(app);
 var io = require('socket.io').listen(server);  //pass a http.Server instance
 
 // Serial Port
-var portName = '/dev/cu.usbmodem431'; // Mac環境
+var portName = '/dev/cu.usbserial-A9E9H3RJ'; // Mac環境
 var sp = new serialport.SerialPort(portName, {
     baudrate: 115200,
     parser: serialport.parsers.readline("\n"),
