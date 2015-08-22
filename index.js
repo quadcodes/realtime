@@ -16,7 +16,8 @@ server.listen(port, function(){
 
 // Serial Port
 var serialPort = new SerialPort('/dev/cu.usbserial-A9E9H3RJ', {
-    baudrate: 115200
+    baudrate: 115200,
+    parser: require('serialport').parsers.readline("\n")
 });
 
 var switch_status;
