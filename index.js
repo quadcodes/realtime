@@ -32,7 +32,7 @@ io.on('connection', function(socket){
     switch_status = msg;
     console.log(msg);
 	//write to serialport
-  	serialPort.write(msg + "\n", function(err, results) {
+  	sp.write(msg + "\n", function(err, results) {
         console.log('bytes written: ', results);
     });   
     
