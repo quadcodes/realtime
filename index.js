@@ -30,8 +30,8 @@ io.on('connection', function(socket){
     /*
 	//write to serialport
   	serialPort.write(msg + "\n", function(err, results) {
-        console.log('bytes written: ', results); */
-    });    
+        console.log('bytes written: ', results);
+    });     */
     
   });
 });
