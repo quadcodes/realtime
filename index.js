@@ -2,19 +2,13 @@ var express = require('express');
 var app = express();
 var http = require('http');
 var url = require('url');
-var serialport = require('serialport');
+var SerialPort = require('serialport').SerialPort;
 var server = http.createServer(app);
 var io = require('socket.io').listen(server);  //pass a http.Server instance
 
 // Serial Port
-var portName = '/dev/cu.usbserial-A9E9H3RJ'; // Mac環境
-var sp = new serialport.SerialPort(portName, {
-    baudrate: 115200,
-    parser: serialport.parsers.readline("\n"),
-    dataBits: 8,
-    parity: 'none',
-    stopBits: 1,
-    flowControl: false,
+var serialPort = new SerialPort('/dev/cu.usbserial-A9E9H3RJ', {
+    baudrate: 115200
 });
 
 // "process.env.PORT" to set port by Heroku
@@ -31,10 +25,10 @@ io.on('connection', function(socket){
   socket.on('switch', function(msg){
     switch_status = msg;
     console.log(msg);
-	//write to serialport
-  	sp.write(msg + "\n", function(err, results) {
+
+    serialPort.write(msg + "\n", function(err, results) {
         console.log('bytes written: ', results);
-    });   
+    });    
     
   });
 });
@@ -69,11 +63,11 @@ sp.on('data', function(data) {
 
 
 
-sp.on('close', function(err) {
+serialPort.on('close', function(err) {
     console.log('port closed');
 });
 
 //serialport open
-sp.open(function () {
+serialPort.open(function () {
   console.log('port open');
 });
