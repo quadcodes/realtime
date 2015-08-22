@@ -25,10 +25,10 @@ io.on('connection', function(socket){
   socket.on('switch', function(msg){
     switch_status = msg;
     console.log(msg);
-
+/*
     serialPort.write(msg + "\n", function(err, results) {
         console.log('bytes written: ', results);
-    });    
+    });    */
     
   });
 });
