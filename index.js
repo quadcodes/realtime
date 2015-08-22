@@ -49,7 +49,7 @@ app.get('/', function(req, res){
 
 
 //data from arduino
-sp.on('data', function(data) {
+serialPort.on('data', function(data) {
 	console.log('serialpor data received: ' + data);
 	try{
 		var length = JSON.parse(data).length;
