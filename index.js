@@ -1,8 +1,13 @@
+// Quick configuration of usb port
+var arduinoSerialPort = "/dev/cu.usbmodem431";
+
 var express = require('express');
 var app = express();
 var http = require('http');
 var url = require('url');
-var SerialPort = require('serialport').SerialPort;
+//var SerialPort = require('serialport').SerialPort;
+var fs = require('fs');
+var path = require('path');
 var server = http.createServer(app);
 var io = require('socket.io').listen(server);  //pass a http.Server instance
 
@@ -15,11 +20,19 @@ server.listen(port, function(){
   console.log('listening on:' + port);
 });
 
+// Init connexion with usb
+var serialport = require('serialport');
+var usb = new serialport.SerialPort(arduinoSerialPort, {
+  parser: serialport.parsers.readline('\n')
+});
+
+/*
 // Serial Port
 var serialPort = new SerialPort("/dev/cu.usbmodem431", {
     baudrate: 9600,
     parser: SerialPort.parsers.readline("\n")
 });
+*/
 
 var switch_status;
 io.on('connection', function(socket){
