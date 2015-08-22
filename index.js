@@ -13,7 +13,7 @@ var io = require('socket.io').listen(server);  //pass a http.Server instance
 var SerialPort = require('serialport').SerialPort;
 var serialPort = new SerialPort('/dev/cu.usbserial-A9E9H3RJ', {
     baudrate: 115200.
-    parser: serialport.parsers.readline("\n"),
+    parser: serialPort.parsers.readline("\n"),
     dataBits: 8,
     parity: 'none',
     stopBits: 1,
