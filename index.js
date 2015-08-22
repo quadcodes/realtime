@@ -63,7 +63,7 @@ app.get('/', function(req, res){
 
 
 //data from arduino
-serialPort.on('data', function(data) {
+usb.on('data', function(data) {
 	console.log('serialpor data received: ' + data);
 	try{
 		var length = JSON.parse(data).length;
@@ -77,11 +77,11 @@ serialPort.on('data', function(data) {
 
 
 
-serialPort.on('close', function(err) {
+usb.on('close', function(err) {
     console.log('port closed');
 });
 
 //serialport open
-serialPort.open(function () {
+usb.open(function () {
   console.log('port open');
 });
